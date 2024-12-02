@@ -1,7 +1,59 @@
-dupa elo chuj
-das
-d
-as
-d
-as
-da
+#include<iostream>
+using namespace std;
+
+int main(){
+
+    /*
+    Napisz program, który przyjmie od użytkownika dwie liczby i sprawdzi, czy:
+    Ich suma jest większa od 100
+    Ich różnica jest większa od 0
+    Ich iloczyn jest większy lub równy 100
+    Ich iloraz nie jest równy 2 O każdym z tych wyników program powinien nas poinformować.
+    Powinien też być (chociaż trochę) zabezpieczony przed błędami (np. podaniem wpisaniem litery).
+    */
+
+int a,b;
+
+    cout << "Podaj liczbe a" << endl;
+    cin >> a;
+    cout << "Podaj liczbe b" << endl;
+    cin >> b;
+
+
+    if(a+b>100) {
+        cout<<"suma wieksza niż 100"<< endl;
+    }
+    else {
+        cout<<"suma nie jest wieksza niż 100"<< endl;
+    }
+
+    if(a-b>0) {
+        cout<<"roznica wieksza niż 0"<< endl;
+    }
+    else {
+        cout<<"roznica nie jest wieksza niż 100"<< endl;
+    }
+
+    if(a*b>=100) {
+        cout<<"iloczyn wieksza rowny 100"<< endl;
+    }
+    else {
+        cout<<"iloczyn nie jest wieksza rowny 100"<< endl;
+    }
+
+    if(a+b>100) {
+        cout<<"suma wieksza niż 100"<< endl;
+    }
+    else {
+        cout<<"suma nie jest wieksza niż 100"<< endl;
+    }
+
+    if(a/b != 2) {
+        cout<<"iloraz nie rowny 2"<< endl;
+    }
+    else {
+        cout<<"ilroaz rowny 2"<< endl;
+    }
+
+    return 0;
+}
