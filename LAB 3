@@ -1,0 +1,43 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+
+    /*
+    Napisz program, który na początku przyjmie od użytkownika liczbę operacji, które ma wykonać.
+    Następnie przez pierwszą połowę swojego działania będzie prosił użytkownika o podanie
+    liczby i dodawał je kolejno do siebie, a w drugiej połowie swojego działania będzie wczytane l
+    iczby od ogólnego wyniku odejmował. Na końcu działania powinien zwrócić ostateczny wynik.
+    Na przykład, dla 6 operacji i podanych kolejno: 5,4,2,2,1,6 wynik powinien wynieść 2. */
+
+
+    int a,b=0,c,d=0;
+    cout << "Ile operacji chcesz wykonać?\n";
+    cin >> a;
+
+    while(b<a/2){
+
+        cout << "Podaj liczby które będziesz dodawać:\n";
+        cin >> c;
+        d += c;
+        b++;
+
+    }
+
+    cout << "Wynik dodawania\n" << d;
+
+    while(b<a){
+
+        cout << "Podaj liczby które będziesz dodawać:\n";
+        cin >> c;
+        d -= c;
+        b++;
+
+    }
+
+    cout << "Wynik całości:\n" << d;
+    
+
+    return 0;
+}
+
