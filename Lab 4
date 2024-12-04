@@ -1,0 +1,128 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    
+    //ZAD 1
+    /*
+    int a;
+    cout<< "Podaj ilość znaków:";
+    cin >> a;
+   for (int i =0; i<a; i++){
+   
+   cout <<"#\n";
+   }
+*/
+
+
+
+//ZAD 2
+/*
+for (int i =1; i<7; i++){
+   
+   cout <<"#";
+}
+for (int i =1; i<5; i++){
+   
+   cout <<"#     #\n";
+}
+for (int i =0; i<7; i++){
+   
+   cout <<"#";
+}
+*/
+
+
+/* TRÓJKĄT RÓWNORAMIENNY  
+int a;
+cout << "Podaj wysokość trójkąta";
+cin >> a;
+
+for (int i=1; i<=a; i++){
+   for (int j=1; j<=i; j++)
+      cout << "*";
+      // Nie do końca rozumiem czemu \n nie działa więc dam endl;
+        cout << endl;
+    for(int j=1;j<=i;j++)
+      cout <<" ";
+}
+*/
+
+// ZAD3
+/*
+int a;
+cout << "Podaj wysokość trójkąta";
+cin >> a;
+
+for (int i=1; i<=a; i++){
+      for (int j = 1; j <= i; j++)
+            cout << "*";
+        cout << endl;
+       
+}
+*/
+
+// ZAD4
+/*
+int w;
+   cout << "Podaj wwyokosc:";
+   cin >> w;
+   for(int a=0;a<w;a++){
+       cout<<" ";
+   }
+    cout<<"A\n";
+    
+    for(int b=1;b<w;b++){
+        
+        for(int c=w;c>b;c--){
+        cout<<" ";
+        }
+        cout<<"A";
+    
+        if(b == w/2){
+        for(int d=1;d<w;d++){
+            cout << "A";
+                }
+        }
+        
+        else{
+            for(int e=1;e!=b*2;e++)
+            cout <<" ";
+            }
+     
+     cout<<"A\n";
+    
+    }
+*/
+    //ZAD 5
+    
+
+    int k,w;
+    cout<<"podaj liczbę kolumn";
+    cin>>k;
+    cout<<"podaj liczbę wierszy";
+    cin>>w;
+    
+    if(k<=9 && w<=9){
+    
+ 
+    for(int i=1;i<=w;i++)
+    {
+        
+        for(int j=1;j<=k;j++)
+        {
+            cout<<i*j<<"   ";
+        }
+        cout<<endl;
+    }
+    }
+    else{
+        cout<<"maksymalny rozmiar tabliczki to 9x9";
+    }
+    
+    
+
+
+
+   return 0;
+}
