@@ -1,0 +1,154 @@
+using namespace std;
+#include <iostream>
+#include <stdlib.h>
+
+int main()
+{
+    //ZAD 1
+    /*
+    int a;
+    int tab[99];
+   cout<<"Ile wyrazów ciągu chcesz uzyskać?";
+   cin >> a;
+    tab[0]=1;
+    tab[1]=1;
+    for(int i=2;i<a;i++){
+        tab[i] = tab[i-2]+tab[i-1];
+    }
+    for(int i=0;i<a;i++){
+        cout <<"Wyraz " << i+1 <<" to" << tab[i] <<endl;
+
+    }
+*/
+
+    //ZAD 2
+    /*
+    int tab[100];
+    int a,b;
+
+
+
+    cout << "Podaj dolna czesc zakresu: ";
+    cin >> a;
+    cout << "Podaj gorna czesc zakresu: ";
+    cin >> b;
+
+    srand(time(NULL));
+    for(int i=0;i<100;i++){
+        tab[i]= rand()% (a - b)  + a;
+    }
+
+    int suma = 0;
+    for (int i = 0; i < 100; i++) {
+        suma += tab[i];
+    }
+
+    a=suma/100;
+
+    cout << "Srednia wartosc elementow w tablicy to: "<< a << endl;
+
+    for (int i = 0; i < 100; i++) {
+        if(tab[i] < a) {
+            cout << "Elementy mnniejsze od sredniej: " << tab[i] << endl;
+        }
+    }
+
+    for (int i = 0; i < 100; i++) {
+        if(tab[i] > a) {
+            cout << "Elementy wieksze od sredniej: " << tab[i] << endl;
+        }
+
+    }
+
+
+
+
+*/
+
+
+
+    //ZAD 3
+    /*
+    int tab[100];
+    int min;
+    min = tab[0];
+    srand(time(NULL));
+    for(int i=0;i<100;i++){
+    tab[i]= rand()%100;;
+    }
+    for(int i=0;i<100;i++){
+    cout << tab[i] << endl;
+    }
+    for(int i=1;i<100;i++){
+    if(min>tab[i]){
+    min = tab[i];}
+    }
+    cout<<"Najmniejszą wczytaną liczbą jest "<<min<<endl;
+    for(int i=1;i<100;i++){
+    if(min<tab[i]){
+    min = tab[i];}
+    }
+    cout<<"Największą wczytaną liczbą jest "<<min<<endl;
+    */
+
+
+//        WERSJA TESTOWA
+
+/*
+
+    int tab[100];
+    int a,b;
+    int tab1[65];
+    int tab2[65];
+
+
+    cout << "Podaj dolna czesc zakresu: ";
+    cin >> a;
+    cout << "Podaj gorna czesc zakresu: ";
+    cin >> b;
+
+    srand(time(NULL));
+    for(int i=0;i<100;i++){
+        tab[i]= rand()% (a - b)  + a;
+    }
+
+    int suma = 0;
+    for (int i = 0; i < 100; i++) {
+        suma += tab[i];
+    }
+
+    a=suma/100;
+
+    cout << "Srednia wartosc elementow w tablicy to: "<< a << endl;
+
+
+
+    for (int i = 0; i < 100; i++) {
+        if(tab[i] < a) {
+            for(int j = 0; j < 65; j++) {
+                tab[i] = tab1[j];
+            }
+            for (int j = 0; j < 65; j++) {
+
+                cout << "Elementy mnniejsze od sredniej: " << tab1[j] << endl;
+            }
+
+        }
+        if(tab[i] >a) {
+            for(int j = 0; j < 65; j++) {
+                tab[i] = tab2[j];
+            }
+            for (int j = 0; j < 65; j++) {
+
+                cout << "Elementy wieksze od sredniej: " << tab2[j] << endl;
+            }
+
+        }
+    }
+
+*/
+
+
+
+    return 0;
+}
