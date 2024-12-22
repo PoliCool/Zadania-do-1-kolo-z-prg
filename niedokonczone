@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <random>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+    string x="q";
+    int y,min=0,max=0;
+    int x2 = stoi(x);
+
+
+while(true){
+
+for(int i=0;i<x2;i++) {
+    cin >>y;
+    if(y == 'q') {
+        break;
+    }
+    else {
+   if(y>max) max = y;
+    }
+    if(y<min) min = y;
+
+}
+}
+cout << max;
+    cout << min;
+return 0;
+}
