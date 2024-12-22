@@ -1,0 +1,170 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+const int SIZE = 100;
+
+// Funkcja do wypełnienia tablicy losowymi liczbami w zakresie podanym przez użytkownika
+void wypelnijTablice(int tablica[], int minVal, int maxVal) {
+    srand(time(0));
+    for (int i = 0; i < SIZE; i++) {
+        tablica[i] = minVal + rand() % (maxVal - minVal + 1);
+    }
+}
+
+// Funkcja do wydrukowania tablicy
+void wydrukujTablice(const int tablica[]) {
+    for (int i = 0; i < SIZE; i++) {
+        cout << tablica[i] << " ";
+    }
+    cout << endl;
+}
+
+// 1. Liczba wystąpień podanego elementu
+int liczbaWystapien(const int tablica[], int element) {
+    int licznik = 0;
+    for (int i = 0; i < SIZE; i++) {
+        if (tablica[i] == element) {
+            licznik++;
+        }
+    }
+    return licznik;
+}
+
+// 2. Liczba elementów nieparzystych
+int liczbaNieparzystych(const int tablica[]) {
+    int licznik = 0;
+    for (int i = 0; i < SIZE; i++) {
+        if (tablica[i] % 2 != 0) {
+            licznik++;
+        }
+    }
+    return licznik;
+}
+
+// 3. Najmniejszy element i jego indeks
+pair<int, int> najmniejszyElement(const int tablica[]) {
+    int najmniejszy = tablica[0];
+    int indeks = 0;
+    for (int i = 1; i < SIZE; i++) {
+        if (tablica[i] < najmniejszy) {
+            najmniejszy = tablica[i];
+            indeks = i;
+        }
+    }
+    return {najmniejszy, indeks};
+}
+
+// 4. Para sąsiadujących elementów o największej sumie
+pair<int, int> paraNajwiekszaSuma(const int tablica[]) {
+    int maxSuma = tablica[0] + tablica[1];
+    int indeks = 0;
+    for (int i = 1; i < SIZE - 1; i++) {
+        int suma = tablica[i] + tablica[i + 1];
+        if (suma > maxSuma) {
+            maxSuma = suma;
+            indeks = i;
+        }
+    }
+    return {tablica[indeks], tablica[indeks + 1]};
+}
+
+// 5. Wydruk elementu pod wybranym indeksem
+int elementPodIndeksem(const int tablica[], int indeks) {
+    return tablica[indeks];
+}
+
+// 6. Zamiana elementów pod wybranymi indeksami
+void zamienElementy(int tablica[], int indeks1, int indeks2) {
+    swap(tablica[indeks1], tablica[indeks2]);
+}
+
+// 7. Wydruk fragmentu tablicy od i do podanych indeksów
+void wydrukujFragment(const int tablica[], int start, int end) {
+    for (int i = start; i <= end; i++) {
+        cout << tablica[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int tablica[SIZE];
+    int minVal, maxVal;
+
+    cout << "Podaj zakres liczb (min i max): ";
+    cin >> minVal >> maxVal;
+
+    // Wypełnienie i wydrukowanie tablicy
+    wypelnijTablice(tablica, minVal, maxVal);
+    cout << "Tablica: \n";
+    wydrukujTablice(tablica);
+
+    int wybor;
+    do {
+        cout << "\nWybierz opcję:\n"
+             << "1. Liczba wystąpień podanego elementu\n"
+             << "2. Liczba elementów nieparzystych\n"
+             << "3. Najmniejszy element i jego indeks\n"
+             << "4. Para sąsiadujących elementów o największej sumie\n"
+             << "5. Wydruk elementu pod wybranym indeksem\n"
+             << "6. Zamiana elementów pod wybranymi indeksami\n"
+             << "7. Wydruk fragmentu tablicy\n"
+             << "0. Wyjście\n"
+             << "Twój wybór: ";
+        cin >> wybor;
+
+        switch (wybor) {
+            case 1: {
+                int element;
+                cout << "Podaj element: ";
+                cin >> element;
+                cout << "Liczba wystąpień: " << liczbaWystapien(tablica, element) << endl;
+                break;
+            }
+            case 2: {
+                cout << "Liczba elementów nieparzystych: " << liczbaNieparzystych(tablica) << endl;
+                break;
+            }
+            case 3: {
+                auto [najmniejszy, indeks] = najmniejszyElement(tablica);
+                cout << "Najmniejszy element: " << najmniejszy << ", Indeks: " << indeks << endl;
+                break;
+            }
+            case 4: {
+                auto [a, b] = paraNajwiekszaSuma(tablica);
+                cout << "Para o największej sumie: " << a << " i " << b << endl;
+                break;
+            }
+            case 5: {
+                int indeks;
+                cout << "Podaj indeks: ";
+                cin >> indeks;
+                cout << "Element: " << elementPodIndeksem(tablica, indeks) << endl;
+                break;
+            }
+            case 6: {
+                int indeks1, indeks2;
+                cout << "Podaj dwa indeksy do zamiany: ";
+                cin >> indeks1 >> indeks2;
+                zamienElementy(tablica, indeks1, indeks2);
+                cout << "Elementy zamienione.\n";
+                break;
+            }
+            case 7: {
+                int start, end;
+                cout << "Podaj początek i koniec zakresu: ";
+                cin >> start >> end;
+                wydrukujFragment(tablica, start, end);
+                break;
+            }
+            case 0:
+                cout << "Koniec programu." << endl;
+                break;
+            default:
+                cout << "Niepoprawna opcja." << endl;
+        }
+    } while (wybor != 0);
+
+    return 0;
+}
