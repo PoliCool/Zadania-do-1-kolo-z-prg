@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <random>
+#include <iostream>
+
+using namespace std;
+
+
+int main() {
+    int n;
+    cin >> n;
+    int A[n];
+
+   // A : lista elementów do posortowania
+   // n = liczba_elementów(A)
+    //zapis
+    for (int i = 0; i < n; i++) {
+            cin >> A[i];
+    }
+    //odczyt
+
+
+    for (int i = 0; i < n; i++) {
+        cout << A[i];
+    }
+ cout << endl;
+
+//sortowanie
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+            if (A[j] > A[j+1]) {
+                swap(A[j], A[j+1]);
+            }
+            }
+        }
+//wypisanie posortowanej tablicy
+    for (int i = 0; i < n; i++) {
+        cout << A[i];
+        }
+
+
+
+    return 0;
+}
