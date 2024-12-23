@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <random>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+char tab[15];
+   // string n = 'ABCDEFGHIJKLMNO';
+    char tab1[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'};
+    char tab2[15];
+    int x=0;
+    for(int i=0;i<15;i++) {
+        cin >> tab2[i];
+        for(int j=0;j<15;j++) {
+            if(tab2[i]==tab1[j]) {
+                x++;
+            }
+        }
+    }
+    cout<<x<<endl;
+return 0;
+}
