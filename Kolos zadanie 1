@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <random>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+
+    float x,  i=0, s = 0, max=0;
+    float sr;
+do {
+    cin >> x;
+s   = s + x;
+    i++;
+    if(x>max) max = x;
+}while(s<1000);
+
+sr = s/i;
+    cout << i << endl;
+    cout << sr << endl;
+    cout << max << endl;
+return 0;
+}
