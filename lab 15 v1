@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    const int LICZBA_STUDENTOW = 10;
+
+    // Predefiniowane dane studentów
+    string imiona[LICZBA_STUDENTOW] = {
+        "Jan Kowalski", "Anna Nowak", "Piotr Wiśniewski",
+        "Maria Lewandowska",
+        "Krzysztof Kamiński", "Agnieszka Dąbrowska",
+              "Tomasz Zieliński",
+        "Monika Kwiatkowska",     "Paweł Szymański", "Katarzyna Wójcik"
+    };
+
+    string numery_indeksow[LICZBA_STUDENTOW] = {
+        "s14616", "s2137",
+        "s12345", "sigma",
+        "s67890",
+        "s98765", "s11111", "sdupa", "s33333", "s44444"
+    };
+
+    float oceny[LICZBA_STUDENTOW]; // Tablica na oceny
+
+    // Pobranie ocen od użytkownika
+    for (int i = 0; i < LICZBA_STUDENTOW; ++i) {
+        cout << "Podaj ocene dla " << imiona[i] << "  "<<  numery_indeksow[i] ;
+        cin >> oceny[i];
+
+    }
+
+    // Ocenki
+    cout << "ocey" << endl;
+    float suma_ocen = 0.0; // Suma ocen do obliczenia średniej
+
+    for (int i = 0; i < LICZBA_STUDENTOW; ++i) {
+        cout << numery_indeksow[i] << ": " << oceny[i] << endl;
+        suma_ocen += oceny[i];
+    }
+
+    // srednia
+    float srednia = suma_ocen / LICZBA_STUDENTOW;
+    cout << "\nSrednia ocen: " << srednia << endl;
+
+    return 0;
+}
