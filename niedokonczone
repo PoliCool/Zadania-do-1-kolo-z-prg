@@ -1,3 +1,5 @@
+#PALINDROM
+/*
 #include <stdio.h>
 #include <random>
 #include <iostream>
@@ -17,3 +19,4 @@ int main() {
     cin >> tekst;
     cout << czypalindrom(tekst) << endl;
 }
+*/
