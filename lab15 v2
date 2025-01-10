@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+struct Samochod {
+    string marka;
+    string model;
+    int rokProdukcji;
+};
+
+int main() {
+    int MAX_SAMOCHODOW = 10;
+    Samochod samochody[MAX_SAMOCHODOW];
+    int n;
+    cout << "ile samochodow?";
+    cin >> n;
+
+    if (n > MAX_SAMOCHODOW || n <= 0) {
+        cout << "Niepoprawna liczba samochodow!" << endl;
+        return 1;
+    }
+
+
+    for (int i = 0; i < n; ++i) {
+        cout << "Podaj marke samochodu " << i+1 << ": ";
+        cin >> samochody[i].marka;
+        cout << "Podaj model samochodu " << i+1 << ": ";
+        cin >> samochody[i].model;
+        cout << "Podaj rok produkcji samochodu " << i+1 << ": ";
+        cin >> samochody[i].rokProdukcji;
+    }
+
+
+    cout << "wszystkie wprowadzone samochody:" << endl;
+    for (int i = 0; i < n; ++i) {
+        cout << "Samochod " << i+1 <<" "<< samochody[i].marka << " " << samochody[i].model << " "<< samochody[i].rokProdukcji << endl;
+    }
+
+    // po 2000
+    int liczbaPo2000 = 0;
+    for (int i = 0; i < n; ++i) {
+        if (samochody[i].rokProdukcji > 2000) {
+            liczbaPo2000++;
+        }
+    }
+    cout << "po roku 2000: " << liczbaPo2000 << endl;
+
+    // *******8
+    // TU SIADLO WSPRACIE INTERNETOWE
+    //***********************
+    int najstarszyIndex = 0;
+    for (int i = 1; i < n; ++i) {
+        if (samochody[i].rokProdukcji < samochody[najstarszyIndex].rokProdukcji) {
+            najstarszyIndex = i;
+        }
+    }
+    cout << "\nNajstarszy samochod: "
+         << samochody[najstarszyIndex].marka << " "
+         << samochody[najstarszyIndex].model << " ("
+         << samochody[najstarszyIndex].rokProdukcji << ")\n";
+
+    return 0;
+}
