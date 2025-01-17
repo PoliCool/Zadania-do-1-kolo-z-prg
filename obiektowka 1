@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class samochod {
+public:
+string marka;
+string model;
+int pojemnosc;
+string rpaliwo;
+
+void create();
+void show();
+};
+
+void samochod::create(){
+cout << "Podaj marke: "<<endl;
+cin >> marka;
+cout << "Podaj model: "<<endl;
+cin >> model;
+cout << "Podaj pojemnosc: "<<endl;
+cin >> pojemnosc;
+cout << "Podaj rodzaj paliwa: "<<endl;
+cin >> rpaliwo;
+cout << endl;
+}
+
+void samochod::show(){
+cout << "Marka: " << marka << endl;
+cout << "Model: " << model << endl;
+cout << "Pojemnosc: " << pojemnosc << endl;
+cout << "Rodzaj paliwa: " << rpaliwo << endl;
+};
+
+int main(){
+samochod auto1;
+auto1.create();
+auto1.show();
+
+return 0;
+}
