@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+class rectangle{
+public:
+int l,w;
+int pole();
+double przekatna();
+    rectangle(double len, double wid): l(len), w(wid) {}
+};
+int rectangle::pole(){
+return l*w;
+;}
+double rectangle::przekatna(){
+return sqrt((pow(l,2) + pow(w,2)));
+}
+int main() {
+int l,w;
+cout << "podaj a: "<< endl;
+cin >> l;
+cout << "podaj b: "<< endl;
+cin >>w;
+
+rectangle Rectangle(l,w);
+cout << "Pole : " << Rectangle.pole()<< endl;
+cout << "Przekatna : " << Rectangle.przekatna() << endl;
+
+return 0;
+}
