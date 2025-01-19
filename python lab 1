@@ -1,0 +1,47 @@
+"""
+#ZAD1
+imie = "Anna"
+wiek = 25
+print(f"Cześć, jestem {imie} i mam {wiek} lat.")
+"""
+"""
+#ZAD2
+lista_liczb = list(range(1, 11))
+for x in lista_liczb:
+    print(pow(x,2))
+"""
+"""
+# Zadanie 3
+liczba = int(input("Wprowadź liczbę: "))
+if liczba > 0:
+    print("Liczba jest dodatnia.")
+elif liczba < 0:
+    print("Liczba jest ujemna.")
+else:
+    print("Liczba jest równa zeru.")
+"""
+
+"""
+#ZAD4
+def policz_srednia(lista):
+    return sum(lista) / len(lista)
+"""
+
+"""
+#ZAD5
+lista1 = [32, 1, 64]
+lista2 = [5,42, 16]
+polaczona_lista = lista1 + lista2
+polaczona_lista.sort()
+print(f"Posortowana lista: {polaczona_lista}")
+"""
+"""
+#ZAD6
+liczba = int(input("Wprowadź liczbę całkowitą: "))
+licznik = 0
+while licznik <= liczba:
+    if licznik > 10:
+        break
+    print(licznik)
+    licznik += 1
+"""
