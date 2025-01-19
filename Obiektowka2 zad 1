@@ -27,8 +27,8 @@ public:
 };
 int main() {
 book b1("Zycie","Amadeusz Ferrari",1899);
-    book b2("To Kill a Mockingbird", "Harper Lee", 1960);
-    book b3("The Great Gatsby", "F. Scott Fitzgerald", 1925);
+    book b2("Trudne sprawy", "TVN", 1960);
+    book b3("Slownik Grypsery", "Wiezien z celi C13", 2008);
 
 b1.wyswietl();
     b2.wyswietl();
