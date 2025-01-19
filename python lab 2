@@ -1,0 +1,53 @@
+
+#zad1
+"""
+thistuple = ("apple", 4, 21.37)
+for x in thistuple:
+    print(x)
+"""
+"""
+#zad2
+tupla_liczb = (10, 20, 30)
+a, b, c = tupla_liczb
+b = 25
+print((a, b, c))
+"""
+
+#ZAD3
+"""
+zbior1 = {1, 2, 3, 4}
+zbior2 = {3, 4, 5, 6}
+print("Suma zbiorów:", zbior1.union(zbior2))
+print("Różnica zbiorów:", zbior1 - zbior2)
+print("Iloczyn zbiorów:", zbior1 & zbior2)
+"""
+"""
+#ZAD4
+zbior_imion = {"Anna", "Piotr", "Maria"}
+imie = input("Wprowadź imię: ")
+if imie in zbior_imion:
+    print(f"Imię {imie} znajduje się w zbiorze.")
+else:
+    print(f"Imię {imie} nie znajduje się w zbiorze.")
+"""
+"""
+#ZAD6
+przedmioty = {
+    "Matematyka": 90,
+    "Fizyka": 85,
+    "Biologia": 78
+}
+for przedmiot, punkty in przedmioty.items():
+    print(f"Przedmiot: {przedmiot}, Punkty: {punkty}")
+"""
+"""
+
+#ZAD5
+ulubione_filmy = {
+    "Incepcja": {"rok": 2010, "reżyser": "Nolan"},
+    "Matrix": {"rok": 1999, "reżyser": "Wachowski"}
+}
+ulubione_filmy["Interstellar"] = {"rok": 2014, "reżyser": "Nolan"}
+for tytul, dane in ulubione_filmy.items():
+    print(f"{tytul} ({dane['rok']})  ")
+"""
