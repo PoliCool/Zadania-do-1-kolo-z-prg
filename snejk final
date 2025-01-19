@@ -1,0 +1,217 @@
+/*
+****************** BIBLIOGRAFIA *********************
+- Podczas tworzenia gry inspirowałem się serią poradników
+NVitanovic'a -> https://www.youtube.com/watch?v=E_-lMZDi7Uw&ab_channel=NVitanovic
+- enum - https://www.w3schools.com/cpp/cpp_enum.asp
+- sleep - https://www.geeksforgeeks.org/sleep-function-in-cpp/
+
+                        Przedstawiam przed szanownym profesorem Michałem Hylą
+                        Moją cudowną grę w węża(gra to dużo powiedziane)
+                        (proszę o litość serio chciałbym zdać ten przedmiot)
+*/
+
+// zeby owocek na poczatku generowal sie losowo
+#include <time.h>
+#include <iostream>
+// do inputu
+#include <conio.h>
+// do sleep'a
+#include <windows.h>
+//sterowanie z zajec z literką M
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
+using namespace std;
+//Rozmiar mapy
+const int width = 40, height = 20;
+//Współrzędne głowy
+int HeadX, HeadY;
+//Współrzędne owocka
+int Fx, Fy;
+//Wynik
+int wynik;
+//enum to coś nowego czego sie nauczylem(zerżnąłem z w3schools)
+//służy do ograniczenia wartości które może przyjąć zmienna
+enum kierunek { STOP = 0,UP, DOWN, LEFT, RIGHT };
+//przechowuje wartosc enuma
+kierunek kierunken;
+bool gameover;
+int OgonX[800], OgonY[800];
+int OgonD;
+
+
+//Funkcja przechowuje startowe parametry gry
+void Start() {
+    gameover = false;
+    //waz nie bedzie sie slizgal do poki nie zostanie
+    //wybrany kierunek(ślizgoni top tylko czarodzieje czystej krwi)
+    kierunken = STOP;
+    //startowe wspolrzedne glowy, wysokosc i szerokosc sa dzielone na 2 zzeby wycentrowac
+    HeadX = width/2;
+    HeadY = height/2;
+    //wspolrzedne startowe owocka(randomowe, musi sie zmiescic w granicy mapy)
+    Fx = rand() % width;
+    Fy = rand() % height;
+    //startowy wynik
+    wynik =0;
+
+
+
+}
+
+//Rysowanie mapy i obiektow
+void Rysowanie() {
+    //czyszczenie konsoli po kazdej iteracji
+    system("cls");
+    //górna ściana
+    for (int i = 0; i < width+3; i++) {
+        cout << "*";
+    }
+        cout << endl;
+    //Reszta mapy, wąż i owoc
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j <= width; j++) {
+            //Lewa ściana
+            if (j == 0) {
+                cout << "*";
+            }
+            //Głowa
+            if (i == HeadY && j == HeadX) {
+                cout<< "$";
+            }
+            //owocek
+            else if(i==Fy && j ==Fx) {
+                cout<< "1";
+            }
+            else {
+                bool print = false;
+                for (int k = 0; k < OgonD; k++) {
+                    if(OgonX[k] == j && OgonY[k] == i) {
+                        cout<<"s";
+                        print = true;
+                }
+                    }
+                if(!print) {
+                    cout<<" ";
+                }
+            }
+
+
+            //prawa ściana
+            if (j == width) {
+                cout << "*";
+            }
+        }
+        cout << endl;
+    }
+
+    //dolna ściana
+    for (int i = 0; i < width+3; i++) {
+        cout << "*";
+    }
+    cout << endl;
+    //Wyświetlenie wyniku
+    cout << "Wynik: " << wynik << endl;
+        }
+//funckaj obsługująca inputy z klawiatury
+void Input() {
+    if(_kbhit()) {
+        switch (_getch()) {
+            case KEY_LEFT:
+                kierunken = LEFT;
+            break;
+            case KEY_RIGHT:
+                kierunken = RIGHT;
+            break;
+            case KEY_UP:
+                kierunken = UP;
+            break;
+            case KEY_DOWN:
+                kierunken = DOWN;
+            break;
+            case 'q':
+                gameover = true;
+            break;
+        }
+    }
+}
+
+void Logika() {
+    int pOgonX=OgonX[0];
+    int pOgonY=OgonY[0];
+    int p2OgonX,p2OgonY;
+    //poruszanie ogona
+    OgonX[0] = HeadX;
+    OgonY[0] = HeadY;
+    for (int i = 1; i < OgonD; i++) {
+        p2OgonX = OgonX[i];
+        p2OgonY = OgonY[i];
+        OgonX[i] = pOgonX;
+        OgonY[i] = pOgonY;
+        pOgonX = p2OgonX;
+        pOgonY = p2OgonY;
+
+    }
+    switch (kierunken) {
+        case UP:
+            HeadY--;
+        break;
+        case DOWN:
+            HeadY++;
+        break;
+        case LEFT:
+            HeadX--;
+        break;
+        case RIGHT:
+            HeadX++;
+        break;
+
+        default:
+            break;
+    }
+    if(HeadX>width || HeadY>height || HeadX<0 || HeadY<0) {
+        gameover = true;
+    }
+    for (int i = 0; i < OgonD; i++) {
+        if(OgonX[i] == HeadX && OgonY[i] == HeadY) {
+            gameover = true;
+        }
+    }
+        if(HeadX==Fx && HeadY==Fy) {
+            wynik++;
+            Fx = rand() % (width);
+            Fy = rand() % (height);
+            OgonD++;
+
+
+        }
+    }
+
+int main() {
+    srand(time(NULL));
+Start();
+    while(!gameover) {
+        Rysowanie();
+        Input();
+        Logika();
+
+        //fragment odpowiadający za spowolnienie całego kodu
+        //niestety wąż poruszał się szybciej w górę i w dół niż w lewo i prawo
+        //więc musiałem użyć sleep'a, gra traci na wydajności ale zyskuje na grywalności
+        if (kierunken == LEFT || kierunken == RIGHT)
+        {
+            Sleep(5);
+        }
+        Sleep(6);
+        if (kierunken == UP || kierunken == DOWN)
+        {
+            Sleep(60);
+        }
+
+    }
+
+
+    return 0;
+}
