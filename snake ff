@@ -1,0 +1,231 @@
+/*
+****************** BIBLIOGRAFIA *********************
+- Podczas tworzenia gry inspirowałem się serią poradników
+NVitanovic'a -> https://www.youtube.com/watch?v=E_-lMZDi7Uw&ab_channel=NVitanovic
+- enum - https://www.w3schools.com/cpp/cpp_enum.asp
+
+                        Przedstawiam przed szanownym profesorem Michałem Hylą
+                        Moją cudowną grę w węża(gra to dużo powiedziane)
+                        (proszę o litość serio chciałbym zdać ten przedmiot)
+*/
+
+// zeby owocek na poczatku generowal sie losowo
+#include <time.h>
+#include <iostream>
+// do inputu
+#include <conio.h>
+// do sleep'a
+#include <windows.h>
+//sterowanie z zajec z literką M
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
+using namespace std;
+//Rozmiar mapy
+const int width = 30, height = 20;
+//Współrzędne głowy
+int HeadX, HeadY;
+//Współrzędne owocka
+int Fx, Fy;
+//Wynik
+int wynik;
+//enum to coś nowego czego sie nauczylem(zerżnąłem z w3schools)
+//służy do ograniczenia wartości które może przyjąć zmienna
+enum kierunek { STOP = 0,UP, DOWN, LEFT, RIGHT };
+//przechowuje wartosc enuma
+kierunek kierunken;
+bool gameover;
+int OgonX[500], OgonY[500]; // tablice na wspolrzedne ogona
+int OgonD; // dlugosc ogona
+
+//Funkcja przechowuje startowe parametry gry
+void Start() {
+    gameover = false;
+    //waz nie bedzie sie slizgal do poki nie zostanie
+    //wybrany kierunek(ślizgoni top tylko czarodzieje czystej krwi)
+    kierunken = STOP;
+    //startowe wspolrzedne glowy, wysokosc i szerokosc sa dzielone na 2 zzeby wycentrowac
+    HeadX = width/2;
+    HeadY = height/2;
+    //wspolrzedne startowe owocka(randomowe, musi sie zmiescic w granicy mapy)
+    Fx = rand() % width;
+    Fy = rand() % height;
+    //startowy wynik
+    wynik =0;
+}
+
+//11 - cyjan, 12 -czerwony,10-zielony,9-NIEBIERSKI,8-szary,
+//Rysowanie mapy i obiektow
+void Rysowanie() {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    //czyszczenie konsoli po kazdej iteracji
+    system("cls");
+    SetConsoleTextAttribute(hConsole, 11);
+    //górna ściana
+    for (int i = 0; i < width+3; i++) {
+        cout << "*";
+    }
+    SetConsoleTextAttribute(hConsole, 7);
+        cout << endl;
+
+    //Reszta mapy, wąż i owoc
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j <= width; j++) {
+            //Lewa ściana
+            SetConsoleTextAttribute(hConsole, 11);
+            if (j == 0) {
+                cout << "*";
+            }
+            SetConsoleTextAttribute(hConsole, 7);
+            //Głowa
+            SetConsoleTextAttribute(hConsole, 10);
+            if (i == HeadY && j == HeadX) {
+                cout<< "$";
+                SetConsoleTextAttribute(hConsole, 7);
+            }
+            //owocek
+            else if(i==Fy && j ==Fx) {
+                SetConsoleTextAttribute(hConsole, 12);
+                cout<< "o";
+            }
+            else {
+                SetConsoleTextAttribute(hConsole, 10);
+                bool print = false; //cwany sposob na wypelnienie pustych pol
+                //jesli na danej wspolrzednej powinien byc ogon to jest rysowane "s"
+                for (int k = 0; k < OgonD; k++) {
+                    if(OgonX[k] == j && OgonY[k] == i) {
+                        cout<<"s";
+                        print = true;
+                }
+                    }
+                SetConsoleTextAttribute(hConsole, 7);
+                //wszedzie tam gdzie nic nie jest narysowane(print = false) wbambiamy kropki
+                if(!print) {
+                    cout<<".";
+                }
+            }
+            //prawa ściana
+            SetConsoleTextAttribute(hConsole, 11);
+            if (j == width) {
+                cout << "*";
+            }
+            SetConsoleTextAttribute(hConsole, 7);
+        }
+        cout << endl;
+    }
+    //dolna ściana
+    SetConsoleTextAttribute(hConsole, 11);
+    for (int i = 0; i < width+3; i++) {
+        cout << "*";
+    }
+    SetConsoleTextAttribute(hConsole, 7);
+    cout << endl;
+    //Wyświetlenie wyniku
+    SetConsoleTextAttribute(hConsole, 3);
+    cout << "Wynik: " << wynik << endl;
+
+   // Sleep(10);
+
+        }
+//funckaj obsługująca inputy z klawiatury
+void Input() {
+    if(_kbhit()) {
+        switch (_getch()) {
+            case KEY_LEFT:
+                kierunken = LEFT;
+            break;
+            case KEY_RIGHT:
+                kierunken = RIGHT;
+            break;
+            case KEY_UP:
+                kierunken = UP;
+            break;
+            case KEY_DOWN:
+                kierunken = DOWN;
+            break;
+            case 'q':
+                gameover = true;
+            break;
+        }
+    }
+}
+
+void Logika() {
+
+    int p2OgonX,p2OgonY;
+    int pOgonX=OgonX[0];
+    int pOgonY=OgonY[0];
+
+    OgonX[0] = HeadX;
+    OgonY[0] = HeadY;
+
+    for (int i = 1; i < OgonD; i++) {
+        p2OgonX = OgonX[i];
+        p2OgonY = OgonY[i];
+        OgonX[i] = pOgonX;
+        OgonY[i] = pOgonY;
+        pOgonX = p2OgonX;
+        pOgonY = p2OgonY;
+
+    }
+    switch (kierunken) {
+        case UP:
+            HeadY--;
+        break;
+        case DOWN:
+            HeadY++;
+        break;
+        case LEFT:
+            HeadX--;
+        break;
+        case RIGHT:
+            HeadX++;
+        break;
+        default:
+            break;
+    }
+    //(0,0),(1,0),(2,0)
+    //(0,1),(1,1),(2,1)
+    //(0,2),(1,2),(2,2)
+    //Jeśli wąż wyjdzie poza granice mapy to game over
+    if(HeadX>width || HeadY>height || HeadX<0 || HeadY<0) {
+        gameover = true;
+    }
+    //Kiedy walniemy w swoj ogon to game over(porownanie wspolrzednych)
+    for (int i = 0; i < OgonD; i++) {
+        if(OgonX[i] == HeadX && OgonY[i] == HeadY) {
+            gameover = true;
+        }
+    }
+    //Co dzieje się po dotknięciu owoca
+        if(HeadX==Fx && HeadY==Fy) {
+            wynik++; // zwiekszony wynik
+            //wspolrzedne owoca sa na nowo generowane(pseudolosowo tak jak ja umiem pseudo programowac)
+            Fx = rand() % (width);
+            Fy = rand() % (height);
+            OgonD++; // zwiekszona wartosc zmiennej przechowujacej dlugosc ogona
+        }
+    }
+
+int main() {
+    srand(time(NULL));
+Start();
+    while(!gameover) {
+        Rysowanie();
+        Input();
+        Logika();
+
+        //fragment odpowiadający za spowolnienie całego kodu
+        //niestety wąż poruszał się szybciej w górę i w dół niż w lewo i prawo
+        //więc musiałem użyć sleep'a, gra traci na wydajności ale zyskuje na grywalności
+       /* if (kierunken == LEFT || kierunken == RIGHT)
+        {}*/
+        if (kierunken == UP || kierunken == DOWN)
+        {
+          Sleep(25);
+        }
+    }
+    return 0;
+}
